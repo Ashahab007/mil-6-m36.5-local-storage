@@ -9,13 +9,14 @@
     <h1>A Simple Shopping Cart to Add product and quantity</h1>
     <p>কোন user এর data যদি browser এ save করে রাখার দরকার পরে।</p>
     <br />
-    <input type="text" name="" id="product-name" />
-    <input type="number" name="" id="product-quantity" />
+    <input type="text" name="" id="product-name" style="height: 30px" />
+    <input type="number" name="" id="product-quantity" style="height: 30px" />
+    <button onclick="handleAddToCArt()" style="height: 30px">
+      Add To Cart
+    </button>
     <br />
     <ul id="product-container"></ul>
 
-    <br />
-    <button onclick="handleAddToCArt()">Add To Cart</button>
     <script>
       const handleAddToCArt = () => {
         const productName = document.getElementById("product-name");
@@ -23,6 +24,7 @@
         const product = productName.value;
         const quantity = productQuantity.value;
         displayCart(product, quantity);
+        setProductToLocalStore(product, quantity);
         productName.value = "";
         productQuantity.value = "";
       };
@@ -32,6 +34,10 @@
         const li = document.createElement("li");
         li.innerText = `${product} : $ ${quantity}`;
         productContainer.append(li);
+      };
+
+      const setProductToLocalStore = (product, quantity) => {
+        localStorage.setItem("cart", JSON.stringify({ product, quantity }));
       };
     </script>
   </body>
