@@ -21,9 +21,9 @@
     </p>
     <p>
       ধরা যাক localStorage কোন data manually save করে রাখা আছে। যদি সেই data
-      access করা হয় তাহলে কিছু method আছে। see the ex-1 for getItem. Note:
-      localStorage এ সব data string অবস্থায় থাকে। see the ex-2 for setItem,
-      getItem & removeItem.
+      access করা হয় তাহলে কিছু method আছে। see the ex-1 in below script for
+      getItem. Note: localStorage এ সব data string অবস্থায় থাকে। see the ex-2 in
+      below script for setItem, getItem & removeItem.
     </p>
     <script>
       // ex-1: getItem = takes single parameter
@@ -38,7 +38,7 @@
       console.log(localStorage.getItem("status")); //isMarried
 
       //SetItem
-      localStorage.setItem("name", "fardin");
+      localStorage.setItem("name", "fardin"); //এইটা পরের line এ remove করা হয়েছে তাই show করবে না।
       /*name	fardin	
     status	isMarried */
 

@@ -28,8 +28,13 @@
       const handleAddToStore = () => {
         let name = "Ammar Shahab";
         localStorage.setItem("Person Name", name); //See the result in browser application
-        /* Note: কিন্তু এখানে যদি name variable এর name টা change করা হয় তাহলে Person Name key তেই variable টা update হয়ে যাবে। আর যদি উপরিউক্ত setItem এর key, person Name টা change করে অন্য কোন key দেওয়া হয় তাহলে localStorage এ Person Name Ammar Shahab এটাও থাকবে এবং নতুন key ও তার value টাও থাকবে। */
+        /* Note: কিন্তু এখানে যদি name variable এর value টা change করা হয় তাহলে Person Name key তেই variable টা update হয়ে যাবে। আর যদি উপরিউক্ত setItem এর key, person Name টা change করে অন্য কোন key দেওয়া হয় তাহলে localStorage এ Person Name Ammar Shahab এটাও থাকবে এবং নতুন key ও তার value টাও থাকবে।  see the below example*/
       };
+
+      // Example
+      let newName = "afnan";
+      localStorage.setItem("Son", newName);
+      console.log(localStorage.getItem("Son")); //Arham
 
       //   Update non-primitive type data (Object) in localStorage
       const handleAddToStoreObj = () => {
@@ -45,14 +50,14 @@
         // To solve it convert to JSON.stringify() and JSON.parse()
         const convertedPersonToStr = JSON.stringify(person);
 
+        console.log(convertedPersonToStr); //{"name":"Alom","age":36,"friends":["hena"]}
+
         console.log(convertedPersonToStr.name); //undefined কারণ stringify . notation দিয়ে access করা যায় না। To solve this problem parse the stringify method.
 
         localStorage.setItem("Nayok", convertedPersonToStr); //এখানে localStorage এ string আকারে save করে রাখা হইসে।
-        console.log(convertedPersonToStr); //{"name":"Alom","age":36,"friends":["hena"]}
-
-        console.log(convertedPersonToStr.name); //undefined
 
         let data = localStorage.getItem("Nayok"); //এরপর localStorage থেকে key টা get করে তা parse করে object এ convert করা হয়েছে data access এর জন্য ।
+
         let converted = JSON.parse(data);
         console.log(converted); //{name: 'Alom', age: 36, friends: Array(1)}
         console.log(converted.age); //36

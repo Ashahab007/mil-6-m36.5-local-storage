@@ -23,8 +23,10 @@
         const productQuantity = document.getElementById("product-quantity");
         const product = productName.value;
         const quantity = productQuantity.value;
+
         displayCart(product, quantity);
-        setProductToLocalStore(product, quantity);
+        saveProductToLocalStore(product, quantity);
+
         productName.value = "";
         productQuantity.value = "";
       };
@@ -36,9 +38,42 @@
         productContainer.append(li);
       };
 
-      const setProductToLocalStore = (product, quantity) => {
-        localStorage.setItem("cart", JSON.stringify({ product, quantity }));
+      // এখানে cart নামে যদি কোন key থাকে localStorage এ সেটা getItem এর মাধ্যমে প্রথমে check করে নেওয়া হচ্ছে। যদি থেকে থাকে তাহলে তা parse এর মাধ্যমে object হয়ে cart নামক key তে update হবে আর না থেকে থাকলে তা empty object হিসেবে return করবে।
+      const getProductFromLocalStorage = () => {
+        let cart = {};
+        let getProduct = localStorage.getItem("cart");
+        if (getProduct) {
+          cart = JSON.parse(getProduct);
+        }
+        return cart;
       };
+
+      const saveProductToLocalStore = (product, quantity) => {
+        const cart = getProductFromLocalStorage(); //এই function টা cart টাকে return করে।
+
+        console.log(cart); //যেহেতু নাই তাই empty object টাই return করে।
+
+        cart[product] = quantity; //এইটা object এর মত i.e const electronics={laptop: 10} যা electronics["laptop"] = 10 এই concept থেকে আসছে।
+
+        const cartString = JSON.stringify(cart); //localStorage এ data টা stringify করে রাখতে হয়।
+
+        localStorage.setItem("cart", cartString); //এরপর data টা local storage এ save করে রাখা হল।
+      };
+
+      // এখন যেহেতু browser reload দিলে html এ display করা product remove হয়ে যায়। তাই এই problem solve করার জন্য আরেকটা function নেওয়া হল।
+
+      const displayProductFromLocalStorage = () => {
+        const products = getProductFromLocalStorage();
+        for (const product in products) {
+          console.log(product, products[product]);
+          displayCart(product, products[product]);
+        }
+      };
+
+      displayProductFromLocalStorage();
+
+      // এখন reload দিলেও এটা যাবে না।
     </script>
   </body>
 </html>
+<!-- "{"tablet": "12"}" -->
