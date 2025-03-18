@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Simple Shopping Cart to Add product and quantity</title>
+  </head>
+  <body>
+    <h1>A Simple Shopping Cart to Add product and quantity</h1>
+    <p>কোন user এর data যদি browser এ save করে রাখার দরকার পরে।</p>
+    <br />
+    <input type="text" name="" id="product-name" />
+    <input type="number" name="" id="product-quantity" />
+    <br />
+    <ul id="product-container"></ul>
+
+    <br />
+    <button onclick="handleAddToCArt()">Add To Cart</button>
+    <script>
+      const handleAddToCArt = () => {
+        const productName = document.getElementById("product-name");
+        const productQuantity = document.getElementById("product-quantity");
+        const product = productName.value;
+        const quantity = productQuantity.value;
+        displayCart(product, quantity);
+        productName.value = "";
+        productQuantity.value = "";
+      };
+
+      const displayCart = (product, quantity) => {
+        const productContainer = document.getElementById("product-container");
+        const li = document.createElement("li");
+        li.innerText = `${product} : $ ${quantity}`;
+        productContainer.append(li);
+      };
+    </script>
+  </body>
+</html>

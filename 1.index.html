@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Read and set simple value from localStorage</h1>
+    <h3>Why Local Storage is used in browser?</h3>
+    <p>Local Storage is used to smooth user experience.</p>
+    <p>
+      সাধারনত e commerce website গুলাতে কোন কিছু cart এ add করলে অই website টা
+      refresh করার পরেও cart এ product add হয়ে থাকে যা browser এর local storage
+      এর কারণে।
+    </p>
+    <p>
+      browser inspect করলে Application এ click করলে key আর value দেখা যায়। এই
+      key, value টা কিছুটা variable এর মত। এখানে key হচ্ছে variable name এবং
+      value হচ্ছে varialble এর value।
+    </p>
+    <p>
+      ধরা যাক localStorage কোন data manually save করে রাখা আছে। যদি সেই data
+      access করা হয় তাহলে কিছু method আছে। see the ex-1 for getItem. Note:
+      localStorage এ সব data string অবস্থায় থাকে। see the ex-2 for setItem,
+      getItem & removeItem.
+    </p>
+    <script>
+      // ex-1: getItem = takes single parameter
+      console.log(localStorage); //Storage {age: '10', length: 1}
+      console.log(localStorage.getItem("age")); //10 যা একটি string
+
+      //   ex-2: setItems = takes 2 parameters as a string
+      localStorage.setItem("status", "isMarried");
+      console.log(
+        "'status' and 'married' is set on browser application as key & value"
+      );
+      console.log(localStorage.getItem("status")); //isMarried
+
+      //SetItem
+      localStorage.setItem("name", "fardin");
+      /*name	fardin	
+    status	isMarried */
+
+      //removeItem
+      localStorage.removeItem("name");
+      /*status isMarried */
+
+      // Another way you can set data in local storage
+      let car = "BMW";
+      localStorage.setItem("myCar", car);
+      console.log(localStorage); //Storage {myCar: 'BMW', status: 'isMarried', length: 2}
+
+      //   CLear items from local storage by using localStorage.clear();
+    </script>
+  </body>
+</html>

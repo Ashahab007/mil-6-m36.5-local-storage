@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Set and get object from localStorage</title>
+  </head>
+  <body>
+    <h1>Set and get object from localStorage</h1>
+    <h3>Update primitive type data in localStorage</h3>
+    <p>set value to localStorage using onclick button</p>
+
+    <br />
+    <br />
+    <button onclick="handleAddToStore()">Add Local Storage</button>
+    <p>See the below script</p>
+    <h3>Update non-primitive type data (Object) in localStorage</h3>
+    <p>set value to localStorage using onclick button</p>
+
+    <br />
+    <br />
+
+    <button onclick="handleAddToStoreObj()">Add Local Storage</button>
+    <p>See the below script</p>
+    <script>
+      // Update primitive type data in localStorage
+
+      const handleAddToStore = () => {
+        let name = "Ammar Shahab";
+        localStorage.setItem("Person Name", name); //See the result in browser application
+        /* Note: কিন্তু এখানে যদি name variable এর name টা change করা হয় তাহলে Person Name key তেই variable টা update হয়ে যাবে। আর যদি উপরিউক্ত setItem এর key, person Name টা change করে অন্য কোন key দেওয়া হয় তাহলে localStorage এ Person Name Ammar Shahab এটাও থাকবে এবং নতুন key ও তার value টাও থাকবে। */
+      };
+
+      //   Update non-primitive type data (Object) in localStorage
+      const handleAddToStoreObj = () => {
+        let person = {
+          name: "Alom",
+          age: 36,
+          friends: ["hena"],
+        };
+
+        // localStorage.setItem("Nayok", person); // [object Object]
+        /* Note: Object এর ক্ষেত্রে এইটা string এ convert করে নিয়ে [object Object] দেখায় কারণ localstorage এ data নেয় string এ। */
+
+        // To solve it convert to JSON.stringify() and JSON.parse()
+        const convertedPersonToStr = JSON.stringify(person);
+
+        console.log(convertedPersonToStr.name); //undefined কারণ stringify . notation দিয়ে access করা যায় না। To solve this problem parse the stringify method.
+
+        localStorage.setItem("Nayok", convertedPersonToStr); //এখানে localStorage এ string আকারে save করে রাখা হইসে।
+        console.log(convertedPersonToStr); //{"name":"Alom","age":36,"friends":["hena"]}
+
+        console.log(convertedPersonToStr.name); //undefined
+
+        let data = localStorage.getItem("Nayok"); //এরপর localStorage থেকে key টা get করে তা parse করে object এ convert করা হয়েছে data access এর জন্য ।
+        let converted = JSON.parse(data);
+        console.log(converted); //{name: 'Alom', age: 36, friends: Array(1)}
+        console.log(converted.age); //36
+      };
+    </script>
+  </body>
+</html>
