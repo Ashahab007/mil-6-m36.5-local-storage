@@ -23,9 +23,14 @@
         const productQuantity = document.getElementById("product-quantity");
         const product = productName.value;
         const quantity = productQuantity.value;
-
-        displayCart(product, quantity);
-        saveProductToLocalStore(product, quantity);
+        /* console.log(Boolean(product) && Boolean(quantity));
+         console.log(typeof quantity); */
+        if (Boolean(product) && Boolean(quantity)) {
+          displayCart(product, quantity);
+          saveProductToLocalStore(product, quantity);
+        } else {
+          return;
+        }
 
         productName.value = "";
         productQuantity.value = "";
