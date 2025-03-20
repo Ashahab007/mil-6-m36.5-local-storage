@@ -23,8 +23,8 @@
         const productQuantity = document.getElementById("product-quantity");
         const product = productName.value;
         const quantity = productQuantity.value;
-        /* console.log(Boolean(product) && Boolean(quantity));
-         console.log(typeof quantity); */
+        console.log(typeof product);
+        console.log(quantity);
         if (Boolean(product) && Boolean(quantity)) {
           displayCart(product, quantity);
           saveProductToLocalStore(product, quantity);
@@ -47,6 +47,9 @@
       const getProductFromLocalStorage = () => {
         let cart = {};
         let getProduct = localStorage.getItem("cart");
+        console.log(cart);
+        console.log(getProduct);
+
         if (getProduct) {
           cart = JSON.parse(getProduct);
         }
@@ -56,11 +59,15 @@
       const saveProductToLocalStore = (product, quantity) => {
         const cart = getProductFromLocalStorage(); //এই function টা cart টাকে return করে।
 
-        console.log(cart); //যেহেতু নাই তাই empty object টাই return করে।
+        console.log(cart);
 
         cart[product] = quantity; //এইটা object এর মত i.e const electronics={laptop: 10} যা electronics["laptop"] = 10 এই concept থেকে আসছে।
 
+        console.log(cart);
+
         const cartString = JSON.stringify(cart); //localStorage এ data টা stringify করে রাখতে হয়।
+
+        console.log(cartString);
 
         localStorage.setItem("cart", cartString); //এরপর data টা local storage এ save করে রাখা হল।
       };
@@ -69,6 +76,8 @@
 
       const displayProductFromLocalStorage = () => {
         const products = getProductFromLocalStorage();
+        console.log(products);
+
         for (const product in products) {
           console.log(product, products[product]);
           displayCart(product, products[product]);
